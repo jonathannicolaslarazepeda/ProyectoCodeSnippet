@@ -69,7 +69,7 @@ public class SnippetDAO {
     public List<Snippet> listarTodos() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
-            return em.createQuery("SELECT s FROM Snippet s ORDER BY s.id DESC", Snippet.class).getResultList();
+            return em.createQuery("SELECT s FROM Snippet s ORDER BY s.id", Snippet.class).getResultList();
         } catch (Exception e) {
             return new ArrayList<Snippet>();
         } finally {

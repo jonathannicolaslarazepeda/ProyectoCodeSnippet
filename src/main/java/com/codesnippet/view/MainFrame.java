@@ -28,13 +28,28 @@ public class MainFrame extends JFrame {
         JTabbedPane pestanas = new JTabbedPane();
         pestanas.setForeground(Color.BLACK);  // Color del texto de las pestanas
 
+        SnippetsPanel snippetsPanel = new SnippetsPanel();
+
         // Agrego cada pestana con su panel correspondiente
         // Cada pestana tiene un nombre y un panel que es el contenido que se muestra
-        pestanas.addTab("Snippets", new SnippetsPanel());       // Panel para gestionar snippets
+        pestanas.addTab("Snippets", snippetsPanel);       // Panel para gestionar snippets
         pestanas.addTab("Usuarios", new UsuariosPanel());       // Panel para gestionar usuarios
         pestanas.addTab("Lenguajes", new LenguajesPanel());     // Panel para gestionar lenguajes de programacion
         pestanas.addTab("Categorias", new CategoriasPanel());   // Panel para gestionar categorias
         pestanas.addTab("Etiquetas", new EtiquetasPanel());     // Panel para gestionar etiquetas
+
+        // Listener para detectar cambio de pestaña
+        pestanas.addChangeListener(e -> {
+
+            int indice = pestanas.getSelectedIndex();
+            String nombre = pestanas.getTitleAt(indice);
+
+            // Si entro a Snippets, recargo los combos
+            if (nombre.equals("Snippets")) {
+                snippetsPanel.actualizarDatos();
+            }
+
+        });
 
         // Agrego las pestanas en el centro de la ventana (ocupa la mayor parte del espacio)
         add(pestanas, BorderLayout.CENTER);

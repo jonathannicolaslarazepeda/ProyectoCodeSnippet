@@ -2,6 +2,8 @@ package com.codesnippet.view;
 
 import com.codesnippet.controller.*;
 import com.codesnippet.model.*;
+import com.codesnippet.service.SnippetService;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -45,8 +47,8 @@ public class SnippetsPanel extends JPanel {
         // Llamo a los metodos que crean cada parte de la interfaz
         crearFormulario();
         crearTabla();
-        cargarCombos();  // Cargo los datos en los combos (usuarios, lenguajes, categorias, etiquetas)
-        cargarTabla(snippetController.listar());  // Cargo todos los snippets en la tabla
+        actualizarDatos();  // Cargo los datos en los combos (usuarios, lenguajes, categorias, etiquetas)
+        cargarTabla(snippetController.listarSnippets());  // Cargo todos los snippets en la tabla
     }
 
     // Metodo para crear todo el formulario con los campos, combos y botones
@@ -202,7 +204,7 @@ public class SnippetsPanel extends JPanel {
         // Cuando le dan clic a Buscar, filtro los snippets por el texto del campo
         btnBuscar.addActionListener(e -> cargarTabla(snippetController.buscar(txtBuscar.getText())));
         // Cuando le dan clic a Ver todos, cargo todos los snippets sin filtro
-        btnTodos.addActionListener(e -> cargarTabla(snippetController.listar()));
+        btnTodos.addActionListener(e -> cargarTabla(snippetController.listarSnippets()));
 
         // Agrego todo el panel central al panel principal
         add(centro, BorderLayout.CENTER);
@@ -251,10 +253,10 @@ public class SnippetsPanel extends JPanel {
             snippet.setEtiquetas(new ArrayList<Etiqueta>(listaEtiquetas.getSelectedValuesList()));
 
             // Llamo al controlador para guardar el snippet
-            snippetController.guardar(snippet);
+            snippetController.guardarSnippet(snippet);
 
             // Recargo la tabla para ver los cambios
-            cargarTabla(snippetController.listar());
+            cargarTabla(snippetController.listarSnippets());
 
             // Limpio el formulario
             limpiar();
@@ -281,9 +283,9 @@ public class SnippetsPanel extends JPanel {
         // Muestro dialogo de confirmacion
         if (JOptionPane.showConfirmDialog(this, "Seguro que quieres eliminar?", "Confirmar", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
             // Si confirma, elimino el snippet
-            snippetController.eliminar(idSeleccionado);
+            snippetController.eliminarSnippet(idSeleccionado);
             // Recargo la tabla
-            cargarTabla(snippetController.listar());
+            cargarTabla(snippetController.listarSnippets());
             // Limpio el formulario
             limpiar();
         }
@@ -357,5 +359,13 @@ public class SnippetsPanel extends JPanel {
         // Deselecciono las etiquetas y la fila de la tabla
         listaEtiquetas.clearSelection();
         tabla.clearSelection();
+    }
+
+    // Metodo publico para refrescar combos y tabla
+    public void actualizarDatos() {
+
+        cargarCombos();
+        cargarTabla(snippetController.listarSnippets());
+
     }
 }

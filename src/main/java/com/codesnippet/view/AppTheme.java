@@ -9,9 +9,11 @@ import java.awt.*;
  * La hice para centralizar todo el diseño en un solo lugar.
  * Así, si quiero cambiar un color o una fuente, solo lo modifico aquí y se aplica a toda la app.
  */
+
 public class AppTheme {
 
     // Defino los colores que voy a usar en toda la aplicación como constantes
+
     public static final Color FONDO = new Color(232, 245, 245);       // Color de fondo general de las ventanas
     public static final Color PANEL = new Color(255, 255, 255);       // Color blanco para los paneles internos
     public static final Color AZUL_OSCURO = new Color(7, 40, 90);     // Color para los títulos principales
@@ -23,6 +25,7 @@ public class AppTheme {
      * Metodo para configurar la ventana principal.
      * Le pongo el color de fondo y la centro en la pantalla.
      */
+
     public static void prepararVentana(JFrame frame) {
         frame.getContentPane().setBackground(FONDO);
         frame.setLocationRelativeTo(null); // Esto hace que la ventana aparezca en el centro de la pantalla
@@ -31,6 +34,7 @@ public class AppTheme {
     /**
      * Crea una etiqueta (JLabel) con el estilo que uso para los títulos grandes.
      */
+
     public static JLabel titulo(String texto) {
         JLabel label = new JLabel(texto);
         label.setForeground(AZUL_OSCURO);
@@ -42,6 +46,7 @@ public class AppTheme {
      * Aplica el estilo estándar a los botones normales.
      * Les quito el borde de foco (focusPainted) para que se vean más limpios al hacer clic.
      */
+
     public static void boton(JButton boton) {
         boton.setBackground(BOTON);
         boton.setForeground(Color.BLACK);
@@ -53,6 +58,7 @@ public class AppTheme {
      * Aplica un estilo especial al botón de Eliminar.
      * Uso un color diferente (naranja/rojizo) para que el usuario sepa que es una acción destructiva.
      */
+
     public static void botonBorrar(JButton boton) {
         boton.setBackground(BORRAR);
         boton.setForeground(Color.BLACK);
@@ -63,6 +69,7 @@ public class AppTheme {
     /**
      * Estilo básico para los campos de texto de una sola línea (JTextField).
      */
+
     public static void campo(JTextField campo) {
         campo.setForeground(Color.BLACK);
         campo.setBackground(Color.WHITE);
@@ -72,6 +79,7 @@ public class AppTheme {
      * Estilo para las áreas de texto grandes (JTextArea), como donde va el código.
      * Uso la fuente "Consolas" porque es monoespaciada y el código se lee mucho mejor.
      */
+
     public static void area(JTextArea area) {
         area.setForeground(Color.BLACK);
         area.setBackground(Color.WHITE);
@@ -81,6 +89,7 @@ public class AppTheme {
     /**
      * Estilo para los desplegables (JComboBox).
      */
+
     public static void combo(JComboBox<?> combo) {
         combo.setForeground(Color.BLACK);
         combo.setBackground(Color.WHITE);
@@ -90,7 +99,9 @@ public class AppTheme {
      * Aqui personalizo toda la tabla (JTable) para que se vea bien.
      * Cambio colores de fondo, texto, líneas de la cuadrícula y, muy importante, el encabezado.
      */
+
     public static void tabla(JTable tabla) {
+
         tabla.setForeground(Color.BLACK);
         tabla.setBackground(Color.WHITE);
         tabla.setGridColor(new Color(200, 220, 220)); // Color suave para las líneas de la cuadrícula
@@ -98,9 +109,11 @@ public class AppTheme {
         tabla.setSelectionBackground(new Color(190, 230, 230)); // Color cuando selecciono una fila
 
         // Personalizo el encabezado de la tabla para que destaque
+
         JTableHeader header = tabla.getTableHeader();
         header.setForeground(Color.BLACK);
         header.setBackground(new Color(210, 240, 240));
         header.setFont(new Font("Arial", Font.BOLD, 13));
+
     }
 }
